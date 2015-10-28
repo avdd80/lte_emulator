@@ -45,7 +45,7 @@ int main ()
 	
 	for (i = 0; i < FFT_WINDOW_SIZE; i++)
 	{
-		printf ("%d ", data_in_ptr[i].re);
+		printf ("%f\n", data_in_ptr[i].re);
 	}
 
     gpu_fft_release(fft); // Videocore memory lost if not freed !
