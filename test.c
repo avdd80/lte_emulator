@@ -5,20 +5,20 @@
 #define FFT_WINDOW_SIZE_LOG2N 11
 #define FFT_WINDOW_SIZE       (1 << FFT_WINDOW_SIZE_LOG2N)
 
-GPU_FFT_COMPLEX data_in[FFT_WINDOW_SIZE];
-GPU_FFT *fft;
-GPU_FFT_COMPLEX *fft_out;
+struct GPU_FFT_COMPLEX data_in[FFT_WINDOW_SIZE];
+struct GPU_FFT *fft;
+struct GPU_FFT_COMPLEX *fft_out;
 
 int main ()
 {
-	int i, mb = mbox_open();
-	for (i = 0; i < 2048; i++)
+	int i, ret, mb = mbox_open();
+	for (i = 0; i < FFT_WINDOW_SIZE; i++)
 	{
 		data_in[i].re = 0;
 		data_in[i].im = 0;
 	}
 	
-	data_[256].re = 2048;
+	data_in[256].re = 2048;
 	
 	mb = mbox_open (void);
 	
