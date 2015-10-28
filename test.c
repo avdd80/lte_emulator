@@ -32,7 +32,7 @@ int main ()
 		data_in_ptr[i].re = 0;
 		data_in_ptr[i].im = 0;
 	}
-	data_in_ptr[256].re = 2048;
+	data_in_ptr[1].re = 2048;
 
 	printf ("Prepare FFT done\n");
 
