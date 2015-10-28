@@ -5,7 +5,7 @@
 #define FFT_WINDOW_SIZE_LOG2N 11
 #define FFT_WINDOW_SIZE       (1 << FFT_WINDOW_SIZE_LOG2N)
 
-struct GPU_FFT_COMPLEX data_in_ptr;
+struct GPU_FFT_COMPLEX *data_in_ptr;
 struct GPU_FFT *fft;
 struct GPU_FFT_COMPLEX *fft_out;
 
