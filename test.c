@@ -20,7 +20,7 @@ int main ()
 	
 	data_in[256].re = 2048;
 	
-	mb = mbox_open (void);
+	mb = mbox_open ();
 	
 	fft->in = data_in;
 	
