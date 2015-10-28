@@ -5,26 +5,21 @@
 #define FFT_WINDOW_SIZE_LOG2N 11
 #define FFT_WINDOW_SIZE       (1 << FFT_WINDOW_SIZE_LOG2N)
 
-struct GPU_FFT_COMPLEX data_in[FFT_WINDOW_SIZE];
+struct GPU_FFT_COMPLEX data_in_ptr;
 struct GPU_FFT *fft;
 struct GPU_FFT_COMPLEX *fft_out;
 
 int main ()
 {
-	int i, ret, mb;
-	for (i = 0; i < FFT_WINDOW_SIZE; i++)
-	{
-		data_in[i].re = 0;
-		data_in[i].im = 0;
-	}
+	int i, ret, mb = mbox_open ();
 	
 	data_in[256].re = 2048;
 	
-	mb = mbox_open ();
-	
-	fft->in = data_in;
-	
     ret = gpu_fft_prepare(mb, FFT_WINDOW_SIZE_LOG2N, GPU_FFT_REV, 1, &fft); // call once
+    
+    printf ("Prepare FFT done\n");
+    
+    data_in_ptr = fft->in;
 
 	switch(ret) {
 		case -1: printf("Unable to enable V3D. Please check your firmware is up to date.\n");         return -1;
@@ -34,9 +29,19 @@ int main ()
 		case -5: printf("Can't open libbcm_host.\n");                                                 return -1;
     }
 
+	for (i = 0; i < FFT_WINDOW_SIZE; i++)
+	{
+		data_in_ptr[i].re = 0;
+		data_in_ptr[i].im = 0;
+	}
+	data_in_ptr[256].re = 2048;
+
+	printf ("Prepare FFT done\n");
 
 	usleep(1); // Yield to OS
 	gpu_fft_execute(fft); // call one or many times
+	
+	printf ("Execute FFT done\n");
 	
 	fft_out = fft->out;
 	
