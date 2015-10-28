@@ -13,8 +13,6 @@ int main ()
 {
 	int i, ret, mb = mbox_open ();
 	
-	data_in[256].re = 2048;
-	
     ret = gpu_fft_prepare(mb, FFT_WINDOW_SIZE_LOG2N, GPU_FFT_REV, 1, &fft); // call once
     
     printf ("Prepare FFT done\n");
