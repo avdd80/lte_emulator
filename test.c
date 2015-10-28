@@ -11,7 +11,7 @@ struct GPU_FFT_COMPLEX *fft_out;
 
 int main ()
 {
-	int i, ret, mb = mbox_open();
+	int i, ret, mb;
 	for (i = 0; i < FFT_WINDOW_SIZE; i++)
 	{
 		data_in[i].re = 0;
