@@ -1,16 +1,13 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <math.h>
 #include "gpu_fft.h"
 #include "mailbox.h"
 
 #define FFT_WINDOW_SIZE_LOG2N 11
 #define FFT_WINDOW_SIZE       (1 << FFT_WINDOW_SIZE_LOG2N)
-GPU_FFT_COMPLEX data_in[FFT_WINDOW_SIZE];
 
-struct GPU_FFT *fft;
-struct GPU_FFT_COMPLEX *fft_out;
+GPU_FFT_COMPLEX data_in[FFT_WINDOW_SIZE];
+GPU_FFT *fft;
+GPU_FFT_COMPLEX *fft_out;
 
 int main ()
 {
@@ -24,6 +21,8 @@ int main ()
 	data_[256].re = 2048;
 	
 	mb = mbox_open (void);
+	
+	fft->in = data_in;
 	
     ret = gpu_fft_prepare(mb, FFT_WINDOW_SIZE_LOG2N, GPU_FFT_REV, 1, &fft); // call once
 
@@ -43,7 +42,7 @@ int main ()
 	
 	for (i = 0; i < FFT_WINDOW_SIZE; i++)
 	{
-		printf ("%d ", fft_out[i]);
+		printf ("%d ", fft_out[i].re);
 	}
 
     gpu_fft_release(fft); // Videocore memory lost if not freed !
