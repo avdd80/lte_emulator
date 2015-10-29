@@ -40,9 +40,13 @@ int main ()
 		data_in_ptr[i].re = 0;
 		data_in_ptr[i].im = 0;
 	}
-	data_in_ptr[2].re = 60;
-	data_in_ptr[2].im = 60;
-	generate_complex_conjugate(data_in_ptr, 2);
+	data_in_ptr[150].re = 60;
+	data_in_ptr[150].im = 60;
+	generate_complex_conjugate(data_in_ptr, 150);
+	data_in_ptr[300].re = -60;
+	data_in_ptr[300].im = 60;
+	generate_complex_conjugate(data_in_ptr, 300);
+
 
 
 	usleep(1); // Yield to OS
