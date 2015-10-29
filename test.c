@@ -9,6 +9,14 @@ struct GPU_FFT_COMPLEX *data_in_ptr;
 struct GPU_FFT *fft;
 struct GPU_FFT_COMPLEX *fft_out;
 
+/* Generates and saves the complex conjugate sample at the mirror 
+   index of the FFT */
+void generate_complex_conjugate (GPU_FFT_COMPLEX *ptr, unsigned int index)
+{
+	ptr[FFT_WINDOW_SIZE - index].re = ptr[index].re;
+	ptr[FFT_WINDOW_SIZE - index].im = -1 * ptr[index].im;
+}
+
 int main ()
 {
 	int i, ret, mb = mbox_open ();
@@ -34,12 +42,7 @@ int main ()
 	}
 	data_in_ptr[2].re = 60;
 	data_in_ptr[2].im = 60;
-	/*data_in_ptr[151].im = 1024;
-	data_in_ptr[201].im = 1024;
-	data_in_ptr[1847].im = 1024;
-	data_in_ptr[1897].im = 1024;*/
-	data_in_ptr[2046].re = 60;
-	data_in_ptr[2046].im = 60;
+	generate_complex_conjugate(data_in_ptr, 2);
 
 
 	usleep(1); // Yield to OS
