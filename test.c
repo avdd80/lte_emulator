@@ -32,10 +32,9 @@ int main ()
 		data_in_ptr[i].re = 0;
 		data_in_ptr[i].im = 0;
 	}
-	data_in_ptr[1].re = 1024;
-	data_in_ptr[2047].re = 1024;
+	data_in_ptr[1].im = 1024;
+	data_in_ptr[2047].im = 1024;
 
-	printf ("Prepare FFT done\n");
 
 	usleep(1); // Yield to OS
 	gpu_fft_execute(fft); // call one or many times
