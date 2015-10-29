@@ -32,8 +32,12 @@ int main ()
 		data_in_ptr[i].re = 0;
 		data_in_ptr[i].im = 0;
 	}
-	data_in_ptr[1].im = 1024;
-	data_in_ptr[2047].im = 1024;
+	data_in_ptr[101].im = 1024;
+	data_in_ptr[151].im = 1024;
+	data_in_ptr[201].im = 1024;
+	data_in_ptr[1847].im = 1024;
+	data_in_ptr[1897].im = 1024;
+	data_in_ptr[1947].im = 1024;
 
 
 	usleep(1); // Yield to OS
