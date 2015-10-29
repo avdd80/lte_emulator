@@ -11,7 +11,7 @@ struct GPU_FFT_COMPLEX *fft_out;
 
 /* Generates and saves the complex conjugate sample at the mirror 
    index of the FFT */
-void generate_complex_conjugate (GPU_FFT_COMPLEX *ptr, unsigned int index)
+void generate_complex_conjugate (struct GPU_FFT_COMPLEX *ptr, unsigned int index)
 {
 	ptr[FFT_WINDOW_SIZE - index].re = ptr[index].re;
 	ptr[FFT_WINDOW_SIZE - index].im = -1 * ptr[index].im;
